@@ -1,5 +1,8 @@
 import requests
 
+from data_processing.load_data import load_data
+
+
 def query_ollama(prompt, model="qwen3:8b"):
     url = "http://localhost:11434/api/generate"
     headers = {"Content-Type": "application/json"}
@@ -15,4 +18,5 @@ def query_ollama(prompt, model="qwen3:8b"):
 
 if __name__ == "__main__":
     result = query_ollama("Explain what is e-commerce")
+    documents = load_data()
     print(result)
