@@ -29,10 +29,19 @@ def summarize_by_brand(result_path="results/summarization/brand/"):
     """
     query_rag(question, get_vector_store(), "summary_by_brand", result_path)
 
+def summarize_by_category(result_path="results/summarization/category/"):
+    """Summarize reviews by category and write output to file"""
+    question = """
+    Please summarize the reviews of all products using a combination of fields site_category_lv1 and site_category_lv2.
+    Present the result in a table where each row has the fields site_category_lv1, site_category_lv2 and summary, write the result in portuguese.
+    """
+    query_rag(question, get_vector_store(), "summary_by_category", result_path)
+
 if __name__ == "__main__":
     # TODO: In case the index doesn't exist, create it by calling
     #  index_documents(load_data()) instead of get_vector_store()
     classify()
     summarize_by_product()
     summarize_by_brand()
+    summarize_by_category()
 
