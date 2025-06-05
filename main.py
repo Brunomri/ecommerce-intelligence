@@ -4,10 +4,10 @@ from rag.rag_chain import query_rag
 def classify(result_path="results/classification/"):
     """Classify product reviews into topics and write output to file"""
     question = """
-    Please extract the topics mentioned in the e-commerce product reviews provided. A few topic examples are: product quality, 
-    delivery, customer service, packaging and usage. For each topic, add how many reviews belong to it. 
-    A review can belong to multiple topics. Present the result in a table where each row has the topic and its review count, 
-    write the result in portuguese.
+    Please extract the topics mentioned in the fields review_title and review_text for each review provided. 
+    A few topic examples are: product quality, delivery, customer service, packaging and usage. 
+    For each topic, add how many reviews belong to it. A review can belong to multiple topics. 
+    Present the result in a table where each row has the topic and its review count, write the result in portuguese.
     """
     query_rag(question, get_vector_store(), "classification", result_path)
 
@@ -37,6 +37,24 @@ def summarize_by_category(result_path="results/summarization/category/"):
     """
     query_rag(question, get_vector_store(), "summary_by_category", result_path)
 
+def sentiment_analysis(result_path="results/sentiment/"):
+    """Analyze sentiments by review and write output to file"""
+    question = """
+    Please consider the fields review_title, overall_rating, recommend_to_a_friend and review_text to build a 
+    sentiment analysis for each review. Try to find balance a low overall_rating is paired with a positive review_text or
+    vice-versa. Present the result in a table where each row has the reviewer_id, review_title, overall_rating, a descriptive
+    concise text about the sentiment analysis, and assign a sentiment category between negative, neutral or positive, write the result in portuguese.
+    """
+    query_rag(question, get_vector_store(), "sentiment_analysis", result_path)
+
+def frequent_questions(result_path="results/questions/"):
+    """Get the most frequent questions from the review texts"""
+    question = """
+    Please return a list of the most frequent questions asked in the field review_text. Present the result in a table 
+    where each row has the question and how many times it appeared, write the result in portuguese. 
+    """
+    query_rag(question, get_vector_store(), "frequent_questions", result_path)
+
 if __name__ == "__main__":
     # TODO: In case the index doesn't exist, create it by calling
     #  index_documents(load_data()) instead of get_vector_store()
@@ -44,4 +62,6 @@ if __name__ == "__main__":
     summarize_by_product()
     summarize_by_brand()
     summarize_by_category()
+    sentiment_analysis()
+    frequent_questions()
 
