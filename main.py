@@ -41,17 +41,18 @@ def sentiment_analysis(result_path="results/sentiment/"):
     """Analyze sentiments by review and write output to file"""
     question = """
     Please consider the fields review_title, overall_rating, recommend_to_a_friend and review_text to build a 
-    sentiment analysis for each review. Try to find balance a low overall_rating is paired with a positive review_text or
-    vice-versa. Present the result in a table where each row has the reviewer_id, review_title, overall_rating, a descriptive
-    concise text about the sentiment analysis, and assign a sentiment category between negative, neutral or positive, write the result in portuguese.
+    sentiment analysis for each review. Try to find balance when a low overall_rating is paired with a positive review_text or
+    vice versa. Present the result in a table where each row has the fields product_id, product_name, review_title, overall_rating, a descriptive
+    concise text about the sentiment analysis, and assign a sentiment category between negative, neutral or positive.
+    Below the table also return the percentage of reviews for each sentiment category mentioned above. Write the results in portuguese.
     """
     query_rag(question, get_vector_store(), "sentiment_analysis", result_path)
 
 def frequent_questions(result_path="results/questions/"):
     """Get the most frequent questions from the review texts"""
     question = """
-    Please return a list of the most frequent questions asked in the field review_text. Present the result in a table 
-    where each row has the question and how many times it appeared, write the result in portuguese. 
+    Please create a list of questions and answers based on the field review_text. Present the result in a table 
+    where each row has the question and a possible response, write the result in portuguese. 
     """
     query_rag(question, get_vector_store(), "frequent_questions", result_path)
 
