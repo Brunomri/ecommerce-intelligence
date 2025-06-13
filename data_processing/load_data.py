@@ -5,7 +5,7 @@ from data_processing.CustomCSVLoader import CustomCSVLoader
 
 def load_data():
     """Read CSV file and split it into chunks."""
-    loader = CustomCSVLoader(file_path="data/B2W-Reviews01.csv", max_rows=100)
+    loader = CustomCSVLoader(file_path="data/B2W-Reviews01.csv", max_rows=300)
     documents = loader.load()
     chunks = split_documents(documents)
     return chunks
@@ -13,8 +13,8 @@ def load_data():
 def split_documents(documents):
     """Splits CSV data into chunks."""
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
+        chunk_size=500,
+        chunk_overlap=100,
         length_function=len,
         is_separator_regex=False,
     )

@@ -45,7 +45,7 @@ def initialize_llm(model_name="qwen3:8b", temperature=0, context_window=8192):
     return llm
 
 # TODO: Review the need of top_chunks parameter
-def create_retriever(vector_store, search_type="similarity", top_chunks=20):
+def create_retriever(vector_store, search_type="similarity", top_chunks=10):
     retriever = vector_store.as_retriever(
         search_type=search_type,
         search_kwargs={'k':top_chunks}
